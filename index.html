@@ -14,6 +14,22 @@
     <div id="map"></div>
     
     <script>
+      
+      var vars = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+          vars[key] = value;
+      });
+
+      var allPoints = vars['points']
+
+      var res = allPoints.split(",")
+
+      for(var i = 0; i < res.length; i++){
+        res[i] = res[i].split("+")
+      }
+
+      console.log(res)
+      
       mapboxgl.accessToken = 'pk.eyJ1IjoibWdyaW1iZXJnIiwiYSI6ImNrNGI0YndsejBhNmczam56OHp2OXJkMDkifQ.UHNtV3A8yj0g5OH3WTksvA';
       var map = new mapboxgl.Map({
         container: 'map',
