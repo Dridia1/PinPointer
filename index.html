@@ -20,14 +20,15 @@
       });
 
       var allPoints = vars['points']
-
+      var accessToken = vars['token']
+      
       var res = allPoints.split(",")
 
       for(var i = 0; i < res.length; i++){
         res[i] = res[i].split("+")
       }
 
-      mapboxgl.accessToken = 'pk.eyJ1IjoibWdyaW1iZXJnIiwiYSI6ImNrNGI0YndsejBhNmczam56OHp2OXJkMDkifQ.UHNtV3A8yj0g5OH3WTksvA';
+      mapboxgl.accessToken = accessToken;
       var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9',
