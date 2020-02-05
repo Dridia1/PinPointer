@@ -14,7 +14,6 @@
     <div id="map"></div>
     
     <script>
-      
       var vars = {};
       var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
           vars[key] = value;
@@ -28,12 +27,12 @@
         res[i] = res[i].split("+")
       }
 
-      console.log(res)
-      
       mapboxgl.accessToken = 'pk.eyJ1IjoibWdyaW1iZXJnIiwiYSI6ImNrNGI0YndsejBhNmczam56OHp2OXJkMDkifQ.UHNtV3A8yj0g5OH3WTksvA';
       var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9'
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center:[11.993714, 57.704610],
+        zoom:17
       });
 
       var size = 200;
@@ -111,34 +110,21 @@
           pixelRatio: 2
         });
 
-        map.addSource('points', {
+        jsonData = {
           'type': 'geojson',
           'data': {
             'type': 'FeatureCollection',
-            'features': [{
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [50, 50]
-                }
-              },
-              {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [60, 50]
-                }
-              },
-              {
-                'type': 'Feature',
-                'geometry': {
-                  'type': 'Point',
-                  'coordinates': [70, 50]
-                }
-              }
-            ]
+            'features': []
           }
-        });
+        }
+        for(var i = 0; i < res.length; i++){
+          json = {'type': 'Feature', 'geometry': {'type': 'Point','coordinates': []}}
+          json['geometry']['coordinates'][0] = parseFloat(res[i][1])
+          json['geometry']['coordinates'][1] = parseFloat(res[i][0])
+          jsonData['data']['features'].push(json)
+        }
+
+        map.addSource('points', jsonData);
         map.addLayer({
           'id': 'points',
           'type': 'symbol',
@@ -148,7 +134,6 @@
           }
         });
       });
-
     </script>
   </body>
 </html>
