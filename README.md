@@ -1,7 +1,7 @@
 # PinPointer
 Pin point on a map using geolocations as url
 
-https://dridia1.github.io/PinPointer/?z=6&points=50.704606+17.993328,50.70457+17.991214
+https://dridia1.github.io/PinPointer/?z=6&token=youraccesstokenprovidedbymapbox&points=50.704606+17.993328,50.70457+17.991214
 
 z is the zoom
 
